@@ -40,7 +40,8 @@ const Signup = () =>
             if(response.status === 200)
             {
                 localStorage.setItem("token", response.data.token);
-                setLoggedInUser(response.data.user);
+                const loggedInUser = {...response.data.user , loading : false};
+                setLoggedInUser(loggedInUser);
                 navigate("/dashboard");
             } 
         }catch(err : any)

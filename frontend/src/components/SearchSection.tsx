@@ -20,7 +20,6 @@ const SearchSection = () =>
 
     useEffect(() =>
     {
-        // console.log(loggedInUser);
         searchUsers();
     } , []);
 
@@ -34,13 +33,15 @@ const SearchSection = () =>
     {
         try
         {
+            const token = localStorage.getItem("token");
+            const headers = {
+              authorization : token
+            }
             const filter = searchInput === "" ? ".*" :  searchInput;
-            const response = await axios.get(BACKEND_URL + "/user/bulk?filter=" + filter , {});
+            const response = await axios.get(BACKEND_URL + "/user/bulk?filter=" + filter , {headers});
             if(response.status === 200)
             {
-                let fetchedUsers = response.data.users;
-                // fetchedUsers = fetchedUsers.filter((user : User) => user.userId !== loggedInUser.userId);
-                setUsers(fetchedUsers);
+              setUsers(response.data.users);;
             }
         }catch(err : any)
         {

@@ -9,8 +9,9 @@ import InitUser from './components/InitUser.tsx';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RecoilRoot>
+    <InitUser/> 
       <NavBar/>   
-      <InitUser/> 
+
       <App />
     </RecoilRoot>
   </React.StrictMode>,

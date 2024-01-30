@@ -166,16 +166,26 @@ userRouter.get("/me" , authMiddleware ,async(req : AuthenticationRequest, res) =
     return res.status(400).send({message : "Error occured while fetching user details"});
 })
 
-userRouter.get("/bulk" , async (req , res) =>
+
+userRouter.get("/bulk" ,authMiddleware ,async (req : AuthenticationRequest , res) =>
 {
     
    let filter = req.query.filter;
+   const loggedInUserId = req.userId;
 
-    const users = await User.find({$or:[{
-        firstName : {"$regex" : filter}
-    },{
-        lastName : {"$regex" : filter}
-    }]});
+   const users = await User.find({
+    $and: [
+      {
+        $or: [
+          { firstName: { $regex: filter, $options: 'i' } }, 
+          { lastName: { $regex: filter, $options: 'i' } },
+        ],
+      },
+      {
+        _id: { $ne: loggedInUserId }, 
+      },
+    ],
+  });
     
     if(users)
     {

@@ -5,7 +5,7 @@ import { BACKEND_URL } from "../config";
 import { useEffect } from "react";
 const InitUser = () =>
 {
-    const setUser = useSetRecoilState(loginUser);
+    const setLoggedInUser = useSetRecoilState(loginUser);
 
     const init = async() =>
     {
@@ -19,8 +19,8 @@ const InitUser = () =>
                 const response = await axios.get(BACKEND_URL + "/user/me" , {headers});
                 if(response.status === 200)
                 {
-                    console.log(response.data);
-                    setUser(response.data);
+                    const loggedInUser = {...response.data.user , loading : false};
+                    setLoggedInUser(loggedInUser);
                 }
             }
         }

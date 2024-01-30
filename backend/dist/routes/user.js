@@ -136,13 +136,22 @@ userRouter.get("/me", authMiddleware_1.default, (req, res) => __awaiter(void 0, 
     }
     return res.status(400).send({ message: "Error occured while fetching user details" });
 }));
-userRouter.get("/bulk", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRouter.get("/bulk", authMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let filter = req.query.filter;
-    const users = yield UserSchema_1.default.find({ $or: [{
-                firstName: { "$regex": filter }
-            }, {
-                lastName: { "$regex": filter }
-            }] });
+    const loggedInUserId = req.userId;
+    const users = yield UserSchema_1.default.find({
+        $and: [
+            {
+                $or: [
+                    { firstName: { $regex: filter, $options: 'i' } },
+                    { lastName: { $regex: filter, $options: 'i' } },
+                ],
+            },
+            {
+                _id: { $ne: loggedInUserId },
+            },
+        ],
+    });
     if (users) {
         const userResponse = users.map(user => {
             return {

@@ -5,5 +5,6 @@ export const loginUser =  atom({
     key: "loginUserAtom",
     default: { username : "",
                 userId : "",
+                loading : true
             }
 })
