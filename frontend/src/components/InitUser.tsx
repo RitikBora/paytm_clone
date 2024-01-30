@@ -16,9 +16,10 @@ const InitUser = () =>
                 const headers = {
                     authorization : token
                 }
-                const response = await axios.post(BACKEND_URL + "/users/me" , {headers});
+                const response = await axios.get(BACKEND_URL + "/user/me" , {headers});
                 if(response.status === 200)
                 {
+                    console.log(response.data);
                     setUser(response.data);
                 }
             }

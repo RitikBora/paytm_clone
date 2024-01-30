@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { loginUser } from "../recoil/atom";
 
 const NavBar = () => {
 
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [activeSession , setActiveSession] = useState(false);
+    const [loggedInUser , setLoggedInUser]  = useRecoilState(loginUser);
 
     useEffect(() =>
     {
@@ -12,14 +14,7 @@ const NavBar = () => {
 
     const init = async () =>
     {
-            const token = localStorage.getItem("token");
-
-            
-            if(token)
-            {
-               setActiveSession(true);
-            }
-        
+        console.log(loggedInUser);
     }
 
     const toggleDropdown = () => {
@@ -29,6 +24,7 @@ const NavBar = () => {
     const logoutUser = () =>
     {
         localStorage.removeItem("token");
+        setLoggedInUser({username : "" , userId : ""});
         window.location.reload();
     }
 
@@ -50,7 +46,7 @@ const NavBar = () => {
                   ></button>
               </div>
               <div className="hidden w-full md:block md:w-auto px-8 md:flex"  id="navbar-default">
-                  {activeSession ? 
+                  {loggedInUser.username !== "" ? 
                     <>
                 <div className="">
                     <button

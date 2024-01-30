@@ -18,7 +18,7 @@ const Dashboard = () =>
 
     const init = async() =>
     {
-       console.log("*******************");
+    //    console.log(user);
     }
     return(
         <div className="relative top-16 bg-white p-8 rounded-md">
