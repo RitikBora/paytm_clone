@@ -1,18 +1,28 @@
 import React from 'react';
+import { useEffect } from 'react';
 
-interface ErrorPopupProps {
-  errorMessage: string;
+interface SuccessPopupProps {
+  successMessage: string;
   onClose: () => void;
 }
 
-const ErrorPopup: React.FC<ErrorPopupProps> = ({ errorMessage, onClose }) => {
+const SuccessPopup: React.FC<SuccessPopupProps> = ({ successMessage, onClose }) => {
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      onClose();
+    }, 3000);
+
+    return () => clearTimeout(timerId);
+  }, [onClose]);
+
   return (
     <div className="fixed bottom-8 flex items-center justify-center">
-      <div className="bg-red-100 border border-red-400 text-red-700 px-8 py-3 rounded-l relative" role="alert">
-        <strong className="font-bold">{errorMessage}</strong>
+      <div className="bg-green-100 border border-green-400 text-green-700 px-8 py-3 rounded-l relative" role="alert">
+        <strong className="font-bold">{successMessage}</strong>
         <span className="absolute top-0 bottom-0 right-2 px-0 py-3">
             <svg
-            className="fill-current h-6 w-6 text-red-500"
+            className="fill-current h-6 w-6 text-green-500"
             role="button"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -28,4 +38,4 @@ const ErrorPopup: React.FC<ErrorPopupProps> = ({ errorMessage, onClose }) => {
   );
 };
 
-export default ErrorPopup;
+export default SuccessPopup;

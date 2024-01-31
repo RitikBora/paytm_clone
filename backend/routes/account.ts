@@ -57,12 +57,11 @@ accountRouter.post("/transfer" , authMiddleware , async(req : AuthenticationRequ
         if(senderAccount && receiverAccount)
         {
         
-            
-            if(!senderAccount.balance > amount)
+            if(senderAccount.balance < amount)
             {
                 await session.abortTransaction();
                 return res.status(400).send({
-                    message: "Invalid account"
+                    message: "Insufficient Balance"
                 });
             }
 

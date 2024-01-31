@@ -1,11 +1,14 @@
 import { useState  , ChangeEvent, useEffect} from "react";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import SendPopup from "./popups/SendPopup";
+import ErrorPopup from "./popups/ErrorPopup";
+import SuccessPopup from "./popups/SucessPopup";
 
 interface User {
     username : string,
     userId: string,
-    accountBalance ?: number
+
     firstName : string
     lastName : string
 }
@@ -17,6 +20,29 @@ const SearchSection = () =>
 
     const [searchInput , setSearchInput] = useState("");
     const [users , setUsers] = useState<User[]>([]);
+    const [isSendPopupOpen, setIsSendPopupOpen] = useState(false);
+    const [success , setSuccess] = useState(null);
+    const [error , setError] = useState(null);
+    const [reciever , setReciever] = useState<User>({
+      username : "",
+      firstName: "",
+      lastName : "",
+      userId : ""
+    });
+
+    const handleCloseSendPopup = () => {
+      
+    };
+
+    const closeErrorPopup = () =>
+    {
+      setError(null);
+    }
+
+    const closeSuccessPopup = () =>
+    {
+      setSuccess(null);
+    }
 
     useEffect(() =>
     {
@@ -27,6 +53,12 @@ const SearchSection = () =>
     const handleInputChange = (e : ChangeEvent<HTMLInputElement>) =>
     {
         setSearchInput(e.target.value);
+    }
+
+    const setRecieverData = (user : User) =>
+    {
+      setReciever(user);
+      setIsSendPopupOpen(true);
     }
 
     const searchUsers = async() =>
@@ -128,7 +160,7 @@ const SearchSection = () =>
                                   <p className="whitespace-no-wrap">{user.lastName}</p>
                                 </td>
                                 <td className="border-b border-gray-200 bg-white px-40 py-3 text-sm text-right">
-                                  <button className="rounded-md bg-green-200 px-3 py-1 text-m font-semibold text-green-900">Send</button>
+                                  <button className="rounded-md bg-green-200 px-3 py-1 text-m font-semibold text-green-900" onClick={() => setRecieverData(user)}>Send</button>
                                 </td>
                               </tr>
                             );
@@ -138,6 +170,15 @@ const SearchSection = () =>
                 </table>
             </div>
         </div>
+        <SendPopup
+          isOpen={isSendPopupOpen}
+          onClose={handleCloseSendPopup}
+          setSuccess = {setSuccess}
+          setError={setError}
+          reciever = {reciever}
+    />
+     {error  && <ErrorPopup errorMessage={error} onClose={closeErrorPopup} />}
+     {success && <SuccessPopup successMessage={success} onClose={closeSuccessPopup} />}
     </>)
 }
 

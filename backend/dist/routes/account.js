@@ -47,10 +47,10 @@ accountRouter.post("/transfer", authMiddleware_1.default, (req, res) => __awaite
             });
         }
         if (senderAccount && receiverAccount) {
-            if (!senderAccount.balance > amount) {
+            if (senderAccount.balance < amount) {
                 yield session.abortTransaction();
                 return res.status(400).send({
-                    message: "Invalid account"
+                    message: "Insufficient Balance"
                 });
             }
             yield AccountSchema_1.default.updateOne({ userId: senderId }, { $inc: { balance: -amount } }).session(session);
