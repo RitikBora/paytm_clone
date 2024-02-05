@@ -15,21 +15,22 @@ const Dashboard = () =>
 
     useEffect(() =>
     {
-        if(user.username === "")
-        {
-            navigate("/");
-        }
+        
         init();
     } , []) 
 
     const init = async() =>
     {
         const token =  localStorage.getItem("token");
+        if(!token)
+        {
+            navigate("/");
+        }
         const headers = {
             authorization : token
         }
         const response = await axios.get(BACKEND_URL + "/account/balance" , {headers});
-
+        
         if(response.status === 200)
         {
             setBalance(response.data.balance);

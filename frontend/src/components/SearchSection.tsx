@@ -31,7 +31,7 @@ const SearchSection = () =>
     });
 
     const handleCloseSendPopup = () => {
-      
+      setIsSendPopupOpen(false);
     };
 
     const closeErrorPopup = () =>
