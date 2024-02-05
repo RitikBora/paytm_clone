@@ -14,15 +14,22 @@ const authMiddleware = (req :AuthenticationRequest , res: Response , next : Next
     {
         return res.status(403).send({message : "Not authorized"});
     }
-
-    const decoded = jwt.verify(authorizationToken , JWT_SECRET) as JwtPayload;
-
-    if(!decoded)
+    try
+    {
+        const decoded = jwt.verify(authorizationToken , JWT_SECRET) as JwtPayload;
+        if(!decoded)
+        {
+            return res.status(403).send({message : "Not authorized"});
+        }
+        req.userId = decoded.userId;
+        next();
+    }catch(err : any)
     {
         return res.status(403).send({message : "Not authorized"});
     }
-    req.userId = decoded.userId;
-    next();
+    
+
+   
 }
 
 export default authMiddleware;

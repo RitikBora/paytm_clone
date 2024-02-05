@@ -10,11 +10,16 @@ const authMiddleware = (req, res, next) => {
     if (!authorizationToken) {
         return res.status(403).send({ message: "Not authorized" });
     }
-    const decoded = jsonwebtoken_1.default.verify(authorizationToken, config_1.JWT_SECRET);
-    if (!decoded) {
+    try {
+        const decoded = jsonwebtoken_1.default.verify(authorizationToken, config_1.JWT_SECRET);
+        if (!decoded) {
+            return res.status(403).send({ message: "Not authorized" });
+        }
+        req.userId = decoded.userId;
+        next();
+    }
+    catch (err) {
         return res.status(403).send({ message: "Not authorized" });
     }
-    req.userId = decoded.userId;
-    next();
 };
 exports.default = authMiddleware;
