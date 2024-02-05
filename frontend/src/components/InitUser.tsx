@@ -9,21 +9,31 @@ const InitUser = () =>
 
     const init = async() =>
     {
-        const token = localStorage.getItem("token");
+        try
+        {
+            const token = localStorage.getItem("token");
           
-            if(token)
-            {
-                const headers = {
-                    authorization : token
-                }
-                const response = await axios.get(BACKEND_URL + "/user/me" , {headers});
-                if(response.status === 200)
-                {
-                    const loggedInUser = {...response.data.user , loading : false};
-                    setLoggedInUser(loggedInUser);
-                }
-            }
+        const headers = {
+            authorization : token
         }
+        const response = await axios.get(BACKEND_URL + "/user/me" , {headers});
+        if(response.status === 200)
+        {
+            const loggedInUser = {...response.data.user , loading : false};
+            setLoggedInUser(loggedInUser);
+        }else
+        {
+            setLoggedInUser({username : "",
+            userId : "",
+            loading : false})
+        }
+        }catch(err : any)
+        {
+            setLoggedInUser({username : "",
+            userId : "",
+            loading : false})
+        }
+    }
 
     useEffect(() =>
     {

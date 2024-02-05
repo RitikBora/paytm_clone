@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { loginUser } from "../recoil/atom";
 
@@ -29,7 +29,7 @@ const NavBar = () => {
                 <div className=" flex flex-wrap items-center justify-between mx-auto py-4">
                 <div className="px-8">
                     <a href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" className="h-8" alt="Flowbite Logo" />
+                    <img src="payLogo.png" className="h-8" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Paytm</span>
                     </a>
                     <button

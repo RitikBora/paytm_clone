@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import SearchSection from "./SearchSection";
 import { loginUser } from "../recoil/atom";
@@ -9,13 +9,16 @@ import axios from "axios";
 
 const Dashboard = () =>
 {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const user = useRecoilValue(loginUser);
     const [balance , setBalance] = useState(null);
 
     useEffect(() =>
     {
-        
+        if(user.username === "")
+        {
+            navigate("/");
+        }
         init();
     } , []) 
 
