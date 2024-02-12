@@ -60,6 +60,8 @@ userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
                     token: token,
                     user: {
                         username: user.username,
+                        firstName: user.username,
+                        lastName: user.lastName,
                         userId: user._id
                     }
                 });
@@ -94,6 +96,8 @@ userRouter.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
             token: token,
             user: {
                 username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 userId: user._id
             }
         });
@@ -130,6 +134,8 @@ userRouter.get("/me", authMiddleware_1.default, (req, res) => __awaiter(void 0, 
         return res.status(200).send({
             user: {
                 username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 userId: user._id
             }
         });

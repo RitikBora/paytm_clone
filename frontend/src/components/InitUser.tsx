@@ -24,12 +24,16 @@ const InitUser = () =>
         }else
         {
             setLoggedInUser({username : "",
+            firstName : "" ,
+            lastName : "",
             userId : "",
             loading : false})
         }
         }catch(err : any)
         {
             setLoggedInUser({username : "",
+            firstName : "" ,
+            lastName : "",
             userId : "",
             loading : false})
         }

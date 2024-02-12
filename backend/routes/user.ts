@@ -64,6 +64,8 @@ userRouter.post("/signup" , async (req , res) =>
                     token: token,
                     user : {
                         username : user.username,
+                        firstName: user.username,
+                        lastName: user.lastName,
                         userId  : user._id
                     }
                 });
@@ -108,6 +110,8 @@ userRouter.post("/signin"  ,async (req , res) =>
             token: token,
             user : {
                 username : user.username,
+                firstName : user.firstName,
+                lastName: user.lastName,
                 userId  : user._id
             }
         });
@@ -159,6 +163,8 @@ userRouter.get("/me" , authMiddleware ,async(req : AuthenticationRequest, res) =
         return res.status(200).send({
             user: {
                 username : user.username,
+                firstName : user.firstName,
+                lastName : user.lastName,
                 userId : user._id
             }
         } )
