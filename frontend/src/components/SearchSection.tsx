@@ -14,8 +14,12 @@ interface User {
 }
 
   
+interface SearchSectionProps {
+  setBalance : React.Dispatch<React.SetStateAction<any>>,
+  balance: string|null
+}
 
-const SearchSection = () =>
+const SearchSection: React.FC<SearchSectionProps> = ({balance , setBalance}) =>
 {
 
     const [searchInput , setSearchInput] = useState("");
@@ -175,6 +179,8 @@ const SearchSection = () =>
           onClose={handleCloseSendPopup}
           setSuccess = {setSuccess}
           setError={setError}
+          balance={balance}
+          setBalance={setBalance}
           reciever = {reciever}
     />
      {error  && <ErrorPopup errorMessage={error} onClose={closeErrorPopup} />}

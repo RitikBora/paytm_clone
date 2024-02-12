@@ -30,7 +30,7 @@ const NavBar = () => {
                 <div className="px-8">
                     <a href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="payLogo.png" className="h-8" alt="Flowbite Logo" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Paytm</span>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BoraPay</span>
                     </a>
                     <button
                     data-collapse-toggle="navbar-default"
@@ -56,7 +56,7 @@ const NavBar = () => {
                             <span className="sr-only">Open user menu</span>
                             <img
                             className="w-8 h-8 rounded-full"
-                            src="/docs/images/people/profile-picture-3.jpg"
+                            src="avatar.png"
                             alt="user photo"
                             />
                         </button>
@@ -67,6 +67,9 @@ const NavBar = () => {
                                 <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
                             </div>
                             <ul className="py-2" aria-labelledby="user-menu-button">
+                                <li>
+                                    <a  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Add Money</a>
+                                </li>
                                 <li>
                                     <a  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={logoutUser}>Logout</a>
                                 </li>

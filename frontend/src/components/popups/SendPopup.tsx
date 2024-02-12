@@ -15,10 +15,12 @@ interface SendPopupProps {
   onClose: () => void;
   setSuccess: React.Dispatch<React.SetStateAction<any>>;
   setError: React.Dispatch<React.SetStateAction<any>>;
+  balance: string|null;
+  setBalance: React.Dispatch<React.SetStateAction<any>>;
   reciever : User
 }
 
-const SendPopup: React.FC<SendPopupProps> = ({ isOpen, onClose ,setSuccess , setError  ,reciever }) => {
+const SendPopup: React.FC<SendPopupProps> = ({ isOpen, onClose ,setSuccess , setError, balance , setBalance  ,reciever }) => {
   const [sendAmount, setSendAmount] = useState("");
 
   const handleAmountChange = (e : ChangeEvent<HTMLInputElement>) =>
@@ -43,6 +45,11 @@ const SendPopup: React.FC<SendPopupProps> = ({ isOpen, onClose ,setSuccess , set
     
             if(response.status === 200)
             {
+                if(balance !== null)
+                {
+                    const newBalance = parseInt(balance) - parseInt(sendAmount);
+                    setBalance(newBalance);
+                }
                 setSuccess(response.data.message);
                 onClose();
             }

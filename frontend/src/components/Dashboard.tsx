@@ -45,7 +45,7 @@ const Dashboard = () =>
                 </div>
             </div>
             <div className="py-8">
-                <SearchSection/>
+                <SearchSection balance={balance} setBalance= {setBalance}/>
             </div>
         </div>
 
