@@ -25,7 +25,6 @@ const authMiddleware = (req :AuthenticationRequest , res: Response , next : Next
         next();
     }catch(err : any)
     {
-        console.log(err.message);
         return res.status(403).send({message : "Not authorized"});
     }
     

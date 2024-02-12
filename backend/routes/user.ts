@@ -200,7 +200,7 @@ userRouter.get("/bulk" ,authMiddleware ,async (req : AuthenticationRequest , res
                 return {
                     username : user.username,
                     firstName : user.firstName,
-                    lastNamec: user.lastName,
+                    lastName: user.lastName,
                     userId: user._id
                 }
             })

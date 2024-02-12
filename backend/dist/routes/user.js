@@ -163,7 +163,7 @@ userRouter.get("/bulk", authMiddleware_1.default, (req, res) => __awaiter(void 0
             return {
                 username: user.username,
                 firstName: user.firstName,
-                lastNamec: user.lastName,
+                lastName: user.lastName,
                 userId: user._id
             };
         });
