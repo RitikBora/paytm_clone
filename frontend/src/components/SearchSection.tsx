@@ -53,6 +53,18 @@ const SearchSection: React.FC<SearchSectionProps> = ({balance , setBalance}) =>
         searchUsers();
     } , []);
 
+    useEffect(() =>
+    {
+      const timeout = setTimeout(() =>
+      {
+        searchUsers();
+      }, 500);
+
+      return () =>
+      {
+        clearTimeout(timeout);
+      }
+    } , [searchInput])
     
     const handleInputChange = (e : ChangeEvent<HTMLInputElement>) =>
     {

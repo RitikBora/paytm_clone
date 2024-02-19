@@ -27,7 +27,8 @@ const InitUser = () =>
             firstName : "" ,
             lastName : "",
             userId : "",
-            loading : false})
+            loading : false});
+            localStorage.removeItem('token');
         }
         }catch(err : any)
         {
@@ -35,7 +36,8 @@ const InitUser = () =>
             firstName : "" ,
             lastName : "",
             userId : "",
-            loading : false})
+            loading : false});
+            localStorage.removeItem('token');
         }
     }
 

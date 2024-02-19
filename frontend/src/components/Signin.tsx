@@ -38,7 +38,6 @@ const Signin = () =>
             {
                 localStorage.setItem("token", response.data.token);
                 const loggedInUser = {...response.data.user , loading : false};
-                console.log(loggedInUser);
                 setLoggedInUser(loggedInUser);
                 navigate("/dashboard");
             } 
