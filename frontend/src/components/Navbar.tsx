@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { loginUser } from "../recoil/atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { loginUser , addMoneyPopupAtom } from "../recoil/atom";
 
 const NavBar = () => {
 
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [loggedInUser , setLoggedInUser]  = useRecoilState(loginUser);
+    const setAddMoneyPopup = useSetRecoilState(addMoneyPopupAtom);
 
 
 
@@ -26,7 +27,7 @@ const NavBar = () => {
             {loggedInUser.loading === true ? 
             <></>
             :
-                <nav className="bg-transparent fixed w-full z-10">
+                <nav className="bg-transparent  w-full z-10">
                 <div className=" flex flex-wrap items-center justify-between mx-auto py-4">
                 <div className="px-8">
                     <a href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -68,7 +69,10 @@ const NavBar = () => {
                             </div>
                             <ul className="py-2" aria-labelledby="user-menu-button">
                                 <li>
-                                    <a  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Add Money</a>
+                                    <a  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={() =>
+                                    {
+                                        setAddMoneyPopup(true);
+                                    }} >Add Money</a>
                                 </li>
                                 <li>
                                     <a  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={logoutUser}>Logout</a>

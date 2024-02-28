@@ -10,3 +10,8 @@ export const loginUser =  atom({
                 loading : true
             }
 })
+
+export const addMoneyPopupAtom = atom({
+    key : "addMoneyPopupKey",
+    default: false
+})

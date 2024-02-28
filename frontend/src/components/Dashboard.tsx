@@ -1,17 +1,32 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import SearchSection from "./SearchSection";
-import { loginUser } from "../recoil/atom";
-import { useRecoilValue } from "recoil";
+import { loginUser , addMoneyPopupAtom} from "../recoil/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import AddMoneyPopup from "./popups/AddMoneyPopup";
+import ErrorPopup from "./popups/ErrorPopup";
+import SuccessPopup from "./popups/SucessPopup";
 
 const Dashboard = () =>
 {
     const navigate = useNavigate();
     const user = useRecoilValue(loginUser);
     const [balance , setBalance] = useState(null);
+    const [moneyPopupOpened , setMoneyPopupOpened] = useRecoilState(addMoneyPopupAtom);
+    const [success , setSuccess] = useState(null);
+    const [error , setError] = useState(null);
+
+    const closeErrorPopup = () =>
+    {
+      setError(null);
+    }
+
+    const closeSuccessPopup = () =>
+    {
+      setSuccess(null);
+    }
 
     useEffect(() =>
     {
@@ -36,6 +51,12 @@ const Dashboard = () =>
             setBalance(response.data.balance);
         }
     }
+
+    const closeAddMoneyPopup = () =>
+    {
+        setMoneyPopupOpened(false);
+    } 
+
     return(
         <div className="relative top-16 bg-white p-8 rounded-md">
             <div>
@@ -44,9 +65,12 @@ const Dashboard = () =>
                     <p className="text-lg text-blue-700">Your current balance is: {balance}</p>
                 </div>
             </div>
+            {moneyPopupOpened && <AddMoneyPopup isOpen={moneyPopupOpened} onClose={closeAddMoneyPopup} setSuccess={setSuccess} setError={setError} />}
             <div className="py-8">
                 <SearchSection balance={balance} setBalance= {setBalance}/>
             </div>
+            {error  && <ErrorPopup errorMessage={error} onClose={closeErrorPopup} />}
+            {success && <SuccessPopup successMessage={success} onClose={closeSuccessPopup} />}
         </div>
 
 

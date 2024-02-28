@@ -65,4 +65,16 @@ accountRouter.post("/transfer", authMiddleware_1.default, (req, res) => __awaite
         message: "Invalid sender details"
     });
 }));
+accountRouter.post("/add", authMiddleware_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const session = yield mongoose_1.default.startSession();
+    session.startTransaction();
+    const userId = req.userId;
+    const amount = req.body.amount;
+    if (amount <= 0) {
+        return res.status(400).send({ message: "invalid amount" });
+    }
+    yield AccountSchema_1.default.updateOne({ userId: userId }, { $inc: { balance: +amount } }).session(session);
+    yield session.commitTransaction();
+    return res.status(200).send({ message: "Money Added Sucessfully" });
+}));
 exports.default = accountRouter;

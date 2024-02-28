@@ -84,4 +84,24 @@ accountRouter.post("/transfer" , authMiddleware , async(req : AuthenticationRequ
 
 })
 
+accountRouter.post("/add" , authMiddleware , async(req : AuthenticationRequest, res) =>
+{
+    const session = await mongoose.startSession();
+
+    session.startTransaction();
+    
+    const userId = req.userId;
+    const amount = req.body.amount;
+
+    if(amount <= 0)
+    {
+        return res.status(400).send({message : "invalid amount"});
+    }
+
+    await Account.updateOne({userId : userId} , {$inc: {balance : +amount}}).session(session);
+    await session.commitTransaction();
+
+    return res.status(200).send({message: "Money Added Sucessfully"});
+})
+
 export default accountRouter;

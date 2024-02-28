@@ -28,7 +28,7 @@ const SendPopup: React.FC<SendPopupProps> = ({
   setBalance,
   reciever,
 }) => {
-  const [sendAmount, setSendAmount] = useState("");
+  const [sendAmount, setSendAmount] = useState("10");
 
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSendAmount(e.target.value);
