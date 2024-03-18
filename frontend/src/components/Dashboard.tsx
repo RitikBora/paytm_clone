@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SearchSection from "./SearchSection";
 import { loginUser , addMoneyPopupAtom} from "../recoil/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 import axios from "axios";
 import AddMoneyPopup from "./popups/AddMoneyPopup";
 import ErrorPopup from "./popups/ErrorPopup";

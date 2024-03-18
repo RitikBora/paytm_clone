@@ -1,7 +1,7 @@
 import { useSetRecoilState } from "recoil";
 import { loginUser } from "../recoil/atom";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 import { useEffect } from "react";
 const InitUser = () =>
 {
