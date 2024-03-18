@@ -38,7 +38,7 @@ const Landing = () =>
           )}
         </div>
         <div className="md:mt-10">
-          <img src="landingPage.jpg" alt="Landing" className="w-full h-2/3" />
+          <img src="/paytm/landingPage.jpg" alt="Landing" className="w-full h-2/3" />
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ const  App = () => {
 
   return (
     <>
-        <BrowserRouter>
+        <BrowserRouter basename="/paytm">
           <Routes>
             <Route path="/" element={<Landing/>} />
             <Route path="/signup" element={<Signup/>}/>

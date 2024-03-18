@@ -31,7 +31,7 @@ const NavBar = () => {
                 <div className=" flex flex-wrap items-center justify-between mx-auto py-4">
                 <div className="px-8">
                     <a href="/dashboard" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="payLogo.png" className="h-8" alt="Flowbite Logo" />
+                    <img src="/paytm/payLogo.png" className="h-8" alt="Flowbite Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BoraPay</span>
                     </a>
                     <button
