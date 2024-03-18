@@ -1,5 +1,5 @@
 import { useState  , ChangeEvent, useEffect} from "react";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 import axios from "axios";
 import SendPopup from "./popups/SendPopup";
 import ErrorPopup from "./popups/ErrorPopup";
